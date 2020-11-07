@@ -6,8 +6,9 @@
       <button type="button" class="btn btn-secondary">ゲストログイン</button>
     </div>
     <div class="button">
-      <button type="button" class="btn btn-primary mr-5">会員登録</button>
-      <button type="button" class="btn btn-success ml-5">ログイン</button>
+      <%= link_to '会員登録', signup_path, class: 'btn btn-primary mr-5' %>
+      <%= link_to 'ログイン', login_path, class: 'btn btn-success ml-5' %>
     </div>
   </div>
 </div>
+
