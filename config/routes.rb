@@ -9,8 +9,10 @@ Rails.application.routes.draw do
   
   get 'signup', to: 'users#new'
   
+  
   resources :users, only: [:index, :show, :new, :create]
   resources :sessions
   resources :shares
 
+  post '/guests/guest_sign_in', to: 'shares#index'
 end
