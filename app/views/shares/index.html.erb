@@ -1,1 +1,10 @@
 <h1>投稿一覧</h1>
+
+<% @shares.each do |share| %>
+<%= link_to share.id, share %>
+ <li><%= share.title %></li>
+ <li><%= share.content %></li>
+ <li><%= share.place %></li>
+<% end %>
+
+<%= link_to '新規投稿', new_share_path %>

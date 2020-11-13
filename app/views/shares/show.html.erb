@@ -1,1 +1,8 @@
 <h1>確認画面</h1>
+
+ <li><%= share.title %></li>
+ <li><%= share.content %></li>
+ <li><%= share.place %></li>
+ 
+ <%= link_to '一覧に戻る', shares_path %>
+ <%= link_to 'この投稿を編集する', edit_shares_path(@share) %>
