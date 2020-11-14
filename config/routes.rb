@@ -6,6 +6,8 @@ Rails.application.routes.draw do
   
   get 'login', to: 'sessions#new'
   post 'login', to: 'shares#index'
+  delete 'logout', to: 'sessions#destroy'
+
   
   get 'signup', to: 'users#new'
   
@@ -14,5 +16,5 @@ Rails.application.routes.draw do
   resources :sessions
   resources :shares
 
-  post '/guests/guest_sign_in', to: 'shares#index'
+  # post '/guests/guest_sign_in', to: 'shares#index'
 end

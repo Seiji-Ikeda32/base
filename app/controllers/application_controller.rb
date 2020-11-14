@@ -3,6 +3,7 @@ class ApplicationController < ActionController::Base
   # def after_log_in_path_for(resource)
   #   share_path 'shares#index'
   # end
+  include SessionsHelper
   
   private
 
@@ -13,3 +14,5 @@ class ApplicationController < ActionController::Base
   end
 
 end
+
+

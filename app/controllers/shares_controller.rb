@@ -1,4 +1,6 @@
 class SharesController < ApplicationController
+  before_action :require_user_logged_in
+  
   def index
     @shares = Share.all
   end
@@ -8,39 +10,37 @@ class SharesController < ApplicationController
   end
     
   def new
-    @share = Share.new
+    @share = current_user.shares.build
   end
     
   def create
-   　 @share = Share.new(share_params)
-
+    @share = current_user.share.build(share_params)
+    
     if @share.save
-      flash[:success] = '投稿されました'
-      redirect_to @share
+      redirect_to share_path(@share), notice: '投稿できました'
     else
-      flash.now[:danger] = '投稿できませんでした'
+      flash.now[:error] = '投稿できませんでした'
       render :new
     end
   end
   
   def edit
-    @share = Share.find(params[:id])
+    @share = current_user.share.find(params[:id])
   end
   
   def update
-    @share = Share.find(params[:id])
+    @share = current_user.share.find(params[:id])
 
     if @share.update(share_params)
-      flash[:success] = '正常に更新されました'
-      redirect_to @share
+      redirect_to share_path(@share), notice: '更新しました'
     else
-      flash.now[:danger] = '更新できませんでした'
+      flash.now[:error] = '更新できませんでした'
       render :edit
     end
   end
   
   def destroy
-    @share = Share.find(params[:id])
+    @share = current_user.share.find(params[:id])
     @share.destroy
 
     flash[:success] = '正常に削除されました'
@@ -51,6 +51,13 @@ class SharesController < ApplicationController
    
   def share_params
     params.require(:share).permit(:title, :content, :place)
+  end
+  
+  def correct_user
+    @micropost = current_user.microposts.find_by(id: params[:id])
+    unless @micropost
+      redirect_to root_url
+    end
   end
     
 end    
